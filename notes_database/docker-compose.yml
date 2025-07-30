@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  notes_database:
+    build: .
+    container_name: notes_database
+    environment:
+      - POSTGRES_DB=${NOTES_DB_NAME}
+      - POSTGRES_USER=${NOTES_DB_USER}
+      - POSTGRES_PASSWORD=${NOTES_DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata_volume:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  pgdata_volume:
